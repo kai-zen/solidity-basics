@@ -33,28 +33,31 @@ ERC20/
 pnpm install
 ```
 
+## Scripts
+
+| Script           | Command                  | Description                          |
+|------------------|--------------------------|--------------------------------------|
+| Compile          | `pnpm run compile`       | Build contracts (Hardhat)            |
+| Test             | `pnpm run test`          | Run Solidity tests                   |
+| Solidity test    | `pnpm run solidity-test` | Run Solidity tests (explicit)        |
+| Coverage         | `pnpm run coverage`      | Run tests with coverage              |
+| Local deploy     | `pnpm run local-deploy`  | Deploy to localhost via Ignition     |
+
 ## Build
 
 ```bash
-npx hardhat compile
+pnpm run compile
 ```
 
 ## Tests
 
-Tests are written with **Foundry** (Forge) in `contracts/MyToken.t.sol`. Run them with:
+Tests are written with **Foundry** (Forge) in `contracts/MyToken.t.sol` and run through Hardhat:
 
 ```bash
-forge test
+pnpm run test
 ```
 
-If you don’t have Foundry yet:
-
-```bash
-curl -L https://foundry.paradigm.xyz | bash
-foundryup
-```
-
-The suite covers:
+The suite’t The suite covers:
 
 - Deployment (name, symbol, decimals, total supply, initial balance)
 - `transfer` (including revert on zero address / insufficient balance)

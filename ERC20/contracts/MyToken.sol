@@ -32,7 +32,7 @@ contract MyToken {
         symbol = _symbol;
         decimals = _decimals;
 
-        totalSupply = _initialSupply * 10 ** uint256(_decimals);
+        totalSupply = _initialSupply;
         balanceOf[msg.sender] = totalSupply;
 
         emit Transfer(address(0), msg.sender, totalSupply);
