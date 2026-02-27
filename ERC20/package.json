@@ -4,7 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+   "compile": "hardhat build",
+    "test": "hardhat test",
+    "solidity-test": "hardhat test solidity",
+    "coverage": "hardhat test --coverage",
+    "local-deploy": "hardhat ignition deploy ignition/modules/MyToken.ts --network localhost"
   },
   "keywords": [],
   "author": "",

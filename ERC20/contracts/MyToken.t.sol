@@ -28,7 +28,6 @@ contract MyTokenTest is Test {
     }
 
     // ─── Deployment
-
     function test_Name() public view {
         assertEq(token.name(), "My Token");
     }
@@ -50,7 +49,6 @@ contract MyTokenTest is Test {
     }
 
     // ─── Transfer
-
     function test_Transfer() public {
         uint256 amount = 500 * 1e18;
         token.transfer(alice, amount);
@@ -67,7 +65,7 @@ contract MyTokenTest is Test {
     }
 
     function test_RevertWhen_TransferInsufficientBalance() public {
-        vm.prank(alice); // alice has 0 tokens
+        vm.prank(alice);
         vm.expectRevert("ERC20: insufficient balance");
         token.transfer(bob, 1);
     }
@@ -86,7 +84,6 @@ contract MyTokenTest is Test {
     }
 
     // ─── Approve / Allowance
-
     function test_Approve() public {
         uint256 amount = 1000 * 1e18;
         token.approve(alice, amount);
@@ -109,7 +106,6 @@ contract MyTokenTest is Test {
     }
 
     // ─── TransferFrom
-
     function test_TransferFrom() public {
         uint256 amount = 300 * 1e18;
         token.approve(alice, amount);
@@ -141,15 +137,14 @@ contract MyTokenTest is Test {
     }
 
     function test_RevertWhen_TransferFromInsufficientBalance() public {
-        // Give alice approval to spend more than owner has
         vm.prank(owner);
-        token.transfer(alice, 100 * 1e18); // drain most of owner's balance
+        token.transfer(alice, 100 * 1e18);
 
-        // owner approves charlie for a huge amount
         token.approve(charlie, INITIAL_SUPPLY);
 
         vm.prank(charlie);
         vm.expectRevert("ERC20: insufficient balance");
+
         // owner now only has INITIAL_SUPPLY - 100e18, try to spend full supply
         token.transferFrom(owner, bob, INITIAL_SUPPLY);
     }
@@ -168,7 +163,6 @@ contract MyTokenTest is Test {
     }
 
     // ─── Mint
-
     function test_Mint() public {
         uint256 amount = 500 * 1e18;
         token.mint(alice, amount);
@@ -215,7 +209,7 @@ contract MyTokenTest is Test {
     }
 
     function test_RevertWhen_BurnExceedsBalance() public {
-        vm.prank(alice); // alice has 0 tokens
+        vm.prank(alice);
         vm.expectRevert("ERC20: burn exceeds balance");
         token.burn(1);
     }

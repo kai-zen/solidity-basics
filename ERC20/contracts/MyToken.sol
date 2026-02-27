@@ -3,6 +3,7 @@ pragma solidity ^0.8.28;
 
 contract MyToken {
     // ─── State Variables
+    address public owner;
     string public name;
     string public symbol;
     uint8 public decimals;
@@ -26,6 +27,7 @@ contract MyToken {
         uint8 _decimals,
         uint256 _initialSupply
     ) {
+        owner = msg.sender;
         name = _name;
         symbol = _symbol;
         decimals = _decimals;
@@ -61,6 +63,15 @@ contract MyToken {
 
         _transfer(from, to, value);
         return true;
+    }
+
+    function mint(address to, uint256 value) external {
+        require(msg.sender == owner, "not owner");
+        _mint(to, value);
+    }
+
+    function burn(uint256 value) external {
+        _burn(msg.sender, value);
     }
 
     // ─── Internal
